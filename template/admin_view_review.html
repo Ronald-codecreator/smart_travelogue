@@ -1,0 +1,29 @@
+{% extends "sindex.html" %}
+{% block body %}
+<center>
+    <h1 style="margin-top:50px">REVIEWS</h1>
+    <table class="table table-stripped" align="center" style="color: white; width:50%; margin-top:100px" border="1">
+        <tr style="background-color: white; color:black">
+            <th>Place-Name</th>
+            <th>Review</th>
+            <th>Rating</th>
+            <th>Date</th>
+            <th>Photo1</th>
+    
+        </tr>
+        {%for i in rev%}
+        <tr><th>
+            {{i.place.place_name}}
+            <th>{{i.review}}</th>
+            <th>{{i.rating}}</th>
+            <th>{{i.date}}</th>
+            <th><img src="/static/{{i.photo1}}" style="width: 100px; height:100px" alt=""></th>
+    
+    
+    </tr>
+        {%endfor%}
+    </table>
+</center>
+
+
+{% endblock %}

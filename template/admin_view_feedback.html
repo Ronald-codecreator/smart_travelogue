@@ -1,0 +1,47 @@
+{% extends "sindex.html" %}
+{% block body %}
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6">
+            <h2 class="text-3xl font-bold text-white text-center">User Feedback</h2>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="p-4 border-b text-gray-800 font-semibold">User Name</th>
+                        <th class="p-4 border-b text-gray-800 font-semibold">Feedback</th>
+                        <th class="p-4 border-b text-gray-800 font-semibold">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in feed %}
+                    <tr class="hover:bg-gray-50 transition-colors duration-200 border-b last:border-b-0">
+                        <td class="p-4 text-gray-800">
+                            <div class="flex items-center">
+                                <svg class="w-8 h-8 mr-3 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                </svg>
+                                {{ i.user.name }}
+                            </div>
+                        </td>
+                        <td class="p-4 text-gray-700">{{ i.feedback }}</td>
+                        <td class="p-4 text-gray-600">{{ i.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if not feed %}
+            <div class="text-center p-8 text-gray-500">
+                <p class="text-xl">No feedback available</p>
+                <svg class="w-24 h-24 mx-auto mt-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

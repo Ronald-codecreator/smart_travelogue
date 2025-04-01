@@ -1,0 +1,143 @@
+{% extends "sindex.html" %}
+{% block body %}
+<div class="container-fluid users-background">
+    <div class="row">
+        <div class="col-12 text-center my-5">
+            <h1 class="display-4 text-white fw-bold user-title">User Directory</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-xl-8">
+            <div class="card users-card shadow-lg">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover users-table mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Sno</th>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Address</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Photo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in b %}
+                                <tr class="user-row">
+                                    <td>
+
+                                                <p class="fw-bold mb-1">{{ forloop.counter }}</p>
+
+                                    </td>
+                                    <td>
+                                       {{ user.Name }}
+
+                                    </td> <td>
+                                       {{ user.Gender }}
+
+                                    </td>
+                                    <td>
+                                        {{ user.Place }} <br>
+                                        {{ user.Pin }} <br>
+                                    </td>
+                                    <td>{{ user.Phonenumber }}</td>
+                                    <td>{{ user.Email }}</td>
+                                    <td>
+
+                                            <img src="{{ user.Photo }}" width="100px" height="100px"
+                                                 class="user-photo rounded-circle"
+                                                 alt="{{ user.name }}'s profile"
+                                                 data-bs-toggle="modal"
+                                                 data-bs-target="#photoModal{{ forloop.counter }}"
+                                            >
+
+                                    </td>
+                                </tr>
+
+                                <!-- Photo Modal -->
+                                <div class="modal fade" id="photoModal{{ forloop.counter }}" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">{{ user.name }}'s Photo</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <img src="static/{{ user.photo }}"
+                                                     class="img-fluid rounded"
+                                                     alt="{{ user.name }}'s full profile photo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">
+                                        No users found
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_head %}
+<style>
+    .users-background {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding-bottom: 50px;
+    }
+
+    .user-title {
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        letter-spacing: 1px;
+    }
+
+    .users-card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .users-table {
+        margin-bottom: 0;
+    }
+
+    .user-photo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .user-photo {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .user-photo:hover {
+        transform: scale(1.1);
+    }
+
+    .user-row:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
